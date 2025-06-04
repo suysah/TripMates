@@ -32,7 +32,10 @@ app.set('trust proxy', 1);
 app.use(
   cors({
     // origin: '*',
-    origin: 'http://localhost:5173', // Vite React frontend
+    origin: [
+      'http://localhost:5173',
+      'https://trip-mates-yik2-devdrz2t2-suysahs-projects.vercel.app',
+    ], // Vite React frontend
     credentials: true,
     methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS', 'PATCH'],
     allowedHeaders: ['Content-Type', 'Authorization'],
