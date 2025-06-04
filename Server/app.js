@@ -29,21 +29,28 @@ app.set('trust proxy', 1);
 
 // 1) GLOBAL MIDDLEWARES
 //implement cors
+const allowedOrigins = [
+  'https://trip-mates-yik2-git-main-suysahs-projects.vercel.app',
+  'http://localhost:5173',
+  'https://trip-mates-yik2-devdrz2t2-suysahs-projects.vercel.app',
+];
+
 app.use(
   cors({
-    // origin: '*',
-    origin: [
-      'https://trip-mates-yik2-git-main-suysahs-projects.vercel.app/',
-      'http://localhost:5173',
-      'https://trip-mates-yik2-devdrz2t2-suysahs-projects.vercel.app',
-    ], // Vite React frontend
+    origin: function (origin, callback) {
+      if (!origin || allowedOrigins.includes(origin)) {
+        callback(null, true);
+      } else {
+        callback(new Error('Not allowed by CORS'));
+      }
+    },
     credentials: true,
     methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS', 'PATCH'],
     allowedHeaders: ['Content-Type', 'Authorization'],
-    preflightContinue: false, // Ensures preflight requests don't continue processing
     optionsSuccessStatus: 204,
   })
 );
+
 // Serving static files
 app.use('/public', express.static(path.join(__dirname, 'public')));
 
