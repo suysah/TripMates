@@ -3,6 +3,7 @@ const userController = require('../controllers/userController');
 const authController = require('./../controllers/authController');
 
 const router = express.Router();
+router.options('*', cors());
 
 router.route('/signup').post(authController.signup);
 router.route('/login').post(authController.login);

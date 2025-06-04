@@ -17,6 +17,8 @@ const {
   getMonthlyPlan,
 } = tourController;
 
+router.options('*', cors());
+
 //param midlleware
 // router.param('id', checkId);
 // router.param('post', tourController.checkBody);

@@ -4,6 +4,7 @@ const router = express.Router();
 
 const authController = require('./../controllers/authController');
 const paymentController = require('./../controllers/paymentController');
+router.options('*', cors());
 
 router.post(
   '/get-payment',

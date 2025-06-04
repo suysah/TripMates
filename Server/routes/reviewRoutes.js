@@ -6,6 +6,7 @@ const router = express.Router({ mergeParams: true }); //to get the parameter fro
 //POSt /tours/579873/reviews
 //POSt /reviews
 //GET /tours/579873/reviews
+router.options('*', cors());
 
 router.use(authController.protect);
 
