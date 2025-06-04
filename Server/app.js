@@ -18,6 +18,7 @@ const reviewRouter = require('./routes/reviewRoutes');
 const viewRouter = require('./routes/viewRoutes');
 const bookingRouter = require('./routes/bookingRoutes');
 const paymentRouter = require('./routes/paymentRoutes');
+const dialogflowRoutes = require('./routes/dialogflowRoutes');
 
 const app = express();
 
@@ -121,6 +122,7 @@ app.use((req, res, next) => {
 
 // 3) ROUTES
 // app.use('/', viewRouter);
+app.use('/api/v1/webhook', dialogflowRoutes);
 app.use('/api/v1/views', viewRouter);
 app.use('/api/v1/tours', tourRouter);
 app.use('/api/v1/users', userRouter);

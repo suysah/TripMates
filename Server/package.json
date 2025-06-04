@@ -1,5 +1,5 @@
 {
-  "name": "natours",
+  "name": "tripmates",
   "version": "1.0.0",
   "main": "app.js",
   "source": "./public/js/index.js",

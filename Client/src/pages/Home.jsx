@@ -1,6 +1,7 @@
 import React from "react";
 import TourCard from "../components/TourCard";
 import { useQuery } from "@tanstack/react-query";
+import ChatBotWidget from "../components/Ui/ChatBotWidget";
 
 const Home = () => {
   const fetchHomeData = async () => {
@@ -24,11 +25,13 @@ const Home = () => {
   if (error) return "An error has occurred " + error.message;
 
   return (
-    <div className=" flex flex-wrap justify-center items-center gap-6 m-6">
-      {data.data.data.map((tour) => (
-        <TourCard tour={tour} key={tour.id} />
-      ))}
-    </div>
+    <>
+      <div className=" flex flex-wrap justify-center items-center gap-6 m-6">
+        {data.data.data.map((tour) => (
+          <TourCard tour={tour} key={tour.id} />
+        ))}
+      </div>
+    </>
   );
 };
 

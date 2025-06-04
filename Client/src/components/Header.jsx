@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import useAuth from "../context/useAuth";
-import { QueryClient, useQueryClient } from "@tanstack/react-query";
+import { useQueryClient } from "@tanstack/react-query";
 import { toast } from "react-toastify";
 
 const Header = () => {
@@ -43,7 +43,17 @@ const Header = () => {
       <div className="container mx-auto text-white flex justify-between items-center">
         <div className="text-2xl font-bold">
           <Link to="/">
-            <h1>TripMates</h1>
+            <h1 className="flex items-center justify-center">
+              <span>
+                <img
+                  src="/Images/icon.png"
+                  alt="logo"
+                  height="40px"
+                  width="40px"
+                />
+              </span>
+              TripMates
+            </h1>
           </Link>
         </div>
 

@@ -12,11 +12,14 @@ import Booking from "./pages/Booking";
 import MyReviews from "./pages/MyReviews";
 import Payment from "./pages/Payment";
 import PrivateRoute from "./components/PrivateRoute";
+import ChatBotWidget from "./components/Ui/ChatBotWidget";
 
 function App() {
   return (
     <>
       <ToastContainer />
+      <ChatBotWidget />
+
       <BrowserRouter>
         <Routes>
           <Route path="/login" element={<Login />} />
