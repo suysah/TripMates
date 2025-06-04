@@ -33,6 +33,7 @@ app.use(
   cors({
     // origin: '*',
     origin: [
+      'https://trip-mates-yik2-git-main-suysahs-projects.vercel.app/',
       'http://localhost:5173',
       'https://trip-mates-yik2-devdrz2t2-suysahs-projects.vercel.app',
     ], // Vite React frontend
