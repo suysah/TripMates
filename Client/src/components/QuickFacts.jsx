@@ -1,11 +1,8 @@
 import React from "react";
 import {
   FaUser,
-  FaMapMarkerAlt,
-  FaFlag,
   FaRegCalendarAlt,
   FaStar,
-  FaArrowUp,
   FaArrowAltCircleUp,
 } from "react-icons/fa";
 import Heading from "./Ui/Heading";

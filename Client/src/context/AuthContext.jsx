@@ -3,7 +3,7 @@ import { useQuery } from "@tanstack/react-query";
 import { AuthContext } from "./useAuth";
 
 const fetchUser = async () => {
-  const res = await fetch("http://localhost:8000/api/v1/users/me", {
+  const res = await fetch(`${import.meta.env.BASE_URL}/api/v1/users/me`, {
     credentials: "include",
   });
 

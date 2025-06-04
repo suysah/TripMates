@@ -1,17 +1,19 @@
-import React from "react";
 import Heading from "../components/Ui/Heading";
 import TourCard from "../components/TourCard";
 import { useQuery } from "@tanstack/react-query";
 
 const Booking = () => {
   const getMyBookings = async () => {
-    const res = await fetch("http://localhost:8000/api/v1/views/my-tours", {
-      method: "GET",
-      headers: {
-        "content-type": "application/json",
-      },
-      credentials: "include",
-    });
+    const res = await fetch(
+      `${import.meta.env.BASE_URL}/api/v1/views/my-tours`,
+      {
+        method: "GET",
+        headers: {
+          "content-type": "application/json",
+        },
+        credentials: "include",
+      }
+    );
     const data = await res.json();
     return data;
   };

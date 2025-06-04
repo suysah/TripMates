@@ -6,11 +6,7 @@ const MyReviews = () => {
   return (
     <div className="pt-2">
       <Heading>YOUR REVIEWS</Heading>
-      <div className="flex flex-wrap justify-center items-center p-6 gap-6 ">
-        {/* <ReviewCard />
-        <ReviewCard />
-        <ReviewCard /> */}
-      </div>
+      <div className="flex flex-wrap justify-center items-center p-6 gap-6 "></div>
     </div>
   );
 };

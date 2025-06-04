@@ -1,4 +1,3 @@
-import React from "react";
 import Header from "../components/Header";
 import AboutTour from "../components/AboutTour";
 import { FaClock, FaMapMarkerAlt } from "react-icons/fa";
@@ -15,7 +14,7 @@ const Details = () => {
   const { id } = useParams();
 
   const fetchDetails = async () => {
-    const res = await fetch(`http://localhost:8000/api/v1/tours/${id}`, {
+    const res = await fetch(`${import.meta.env.BASE_URL}/api/v1/tours/${id}`, {
       method: "GET",
       headers: {
         "content-type": "application/json",
@@ -27,7 +26,7 @@ const Details = () => {
   };
 
   const fetchReviews = async () => {
-    const res = await fetch(`http://localhost:8000/api/v1/reviews/`, {
+    const res = await fetch(`${import.meta.env.BASE_URL}/api/v1/reviews/`, {
       method: "GET",
       headers: {
         "content-type": "application/json",

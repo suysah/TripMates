@@ -15,14 +15,17 @@ const Login = () => {
 
   const mutateLogin = useMutation({
     mutationFn: async (loginInfo) => {
-      const res = await fetch("http://localhost:8000/api/v1/users/login", {
-        method: "POST",
-        body: JSON.stringify(loginInfo),
-        headers: {
-          "content-type": "application/json",
-        },
-        credentials: "include", // Optional but common if you use cookies/session
-      });
+      const res = await fetch(
+        `${import.meta.env.BASE_URL}/api/v1/users/login`,
+        {
+          method: "POST",
+          body: JSON.stringify(loginInfo),
+          headers: {
+            "content-type": "application/json",
+          },
+          credentials: "include", // Optional but common if you use cookies/session
+        }
+      );
 
       if (!res.ok) throw new Error("Incorrect email or password ");
 

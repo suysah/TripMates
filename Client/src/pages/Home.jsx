@@ -5,7 +5,7 @@ import ChatBotWidget from "../components/Ui/ChatBotWidget";
 
 const Home = () => {
   const fetchHomeData = async () => {
-    const res = await fetch("http://localhost:8000/api/v1/tours/");
+    const res = await fetch(`${import.meta.env.BASE_URL}/api/v1/tours/`);
     return res.json();
   };
 

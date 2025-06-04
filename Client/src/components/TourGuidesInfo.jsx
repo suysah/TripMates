@@ -1,4 +1,3 @@
-import React from "react";
 import Heading from "./Ui/Heading";
 
 const TourGuidesInfo = ({ guides }) => {

@@ -5,7 +5,7 @@ import { useMutation, useQuery } from "@tanstack/react-query";
 import { toast } from "react-toastify";
 
 const addBooking = async (booking) => {
-  const res = await fetch(`http://localhost:8000/api/v1/bookings/`, {
+  const res = await fetch(`${import.meta.env.BASE_URL}/api/v1/bookings/`, {
     method: "POST",
     body: JSON.stringify(booking),
     headers: {
@@ -22,7 +22,7 @@ const Payment = () => {
   const navigate = useNavigate();
 
   const fetchDetails = async () => {
-    const res = await fetch(`http://localhost:8000/api/v1/tours/${id}`, {
+    const res = await fetch(`${import.meta.env.BASE_URL}/api/v1/tours/${id}`, {
       method: "GET",
       headers: {
         "content-type": "application/json",

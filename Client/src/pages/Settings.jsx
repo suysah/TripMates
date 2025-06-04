@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import Heading from "../components/Ui/Heading";
 import useAuth from "../context/useAuth";
 import PasswordChange from "../components/PasswordChange";
@@ -17,11 +17,14 @@ const Settings = () => {
 
   const mutateUser = useMutation({
     mutationFn: async (formData) => {
-      const res = await fetch("http://localhost:8000/api/v1/users/updateMe", {
-        method: "PATCH",
-        body: formData,
-        credentials: "include",
-      });
+      const res = await fetch(
+        `${import.meta.env.BASE_URL}/api/v1/users/updateMe`,
+        {
+          method: "PATCH",
+          body: formData,
+          credentials: "include",
+        }
+      );
       if (!res.ok) throw new Error("Updation failed!");
       return res.json();
     },
