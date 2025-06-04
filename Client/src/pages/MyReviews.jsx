@@ -1,4 +1,3 @@
-import React from "react";
 import Heading from "../components/Ui/Heading";
 import ReviewCard from "../components/ReviewCard";
 

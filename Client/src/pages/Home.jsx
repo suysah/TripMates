@@ -1,11 +1,10 @@
 import React from "react";
 import TourCard from "../components/TourCard";
 import { useQuery } from "@tanstack/react-query";
-import ChatBotWidget from "../components/Ui/ChatBotWidget";
 
 const Home = () => {
   const fetchHomeData = async () => {
-    const res = await fetch(`${import.meta.env.BASE_URL}/api/v1/tours/`);
+    const res = await fetch(`${import.meta.env.VITE_BASE_URL}/api/v1/tours/`);
     return res.json();
   };
 

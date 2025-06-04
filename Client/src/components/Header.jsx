@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import useAuth from "../context/useAuth";
 import { useQueryClient } from "@tanstack/react-query";
@@ -19,11 +19,11 @@ const Header = () => {
     }
   }, [user]);
 
-  const BASE_URL = import.meta.env.VITE_API_BASE_URL;
+  const BASE_URL = import.meta.env.VITE_BASE_URL;
 
   const handleLogout = async () => {
     try {
-      await fetch("http://localhost:8000/api/v1/users/logout", {
+      await fetch(`${BASE_URL}/api/v1/users/logout`, {
         method: "GET",
         credentials: "include",
       });
@@ -69,7 +69,7 @@ const Header = () => {
             <Link to="/account">
               <div className="flex gap-2 justify-center items-center text-white px-4 py-2 rounded hover:text-lg transition ">
                 <img
-                  src={`${BASE_URL}/users/${user?.photo}`}
+                  src={`${BASE_URL}/public/img/users/${user?.photo}`}
                   alt="user DP"
                   className="h-8 w-8 rounded-full"
                 />{" "}

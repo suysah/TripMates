@@ -5,7 +5,7 @@ import { useQuery } from "@tanstack/react-query";
 const Booking = () => {
   const getMyBookings = async () => {
     const res = await fetch(
-      `${import.meta.env.BASE_URL}/api/v1/views/my-tours`,
+      `${import.meta.env.VITE_BASE_URL}/api/v1/views/my-tours`,
       {
         method: "GET",
         headers: {

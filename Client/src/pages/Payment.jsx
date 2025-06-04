@@ -5,7 +5,7 @@ import { useMutation, useQuery } from "@tanstack/react-query";
 import { toast } from "react-toastify";
 
 const addBooking = async (booking) => {
-  const res = await fetch(`${import.meta.env.BASE_URL}/api/v1/bookings/`, {
+  const res = await fetch(`${import.meta.env.VITE_BASE_URL}/api/v1/bookings/`, {
     method: "POST",
     body: JSON.stringify(booking),
     headers: {
@@ -18,11 +18,12 @@ const addBooking = async (booking) => {
 };
 
 const Payment = () => {
+  const BASE_URL = import.meta.env.VITE_BASE_URL;
   const { id } = useParams();
   const navigate = useNavigate();
 
   const fetchDetails = async () => {
-    const res = await fetch(`${import.meta.env.BASE_URL}/api/v1/tours/${id}`, {
+    const res = await fetch(`${BASE_URL}/api/v1/tours/${id}`, {
       method: "GET",
       headers: {
         "content-type": "application/json",
@@ -57,8 +58,6 @@ const Payment = () => {
   if (isLoading) return "Loading";
   if (error) return "error" + error.message;
 
-  const BASE_URL = import.meta.env.VITE_API_BASE_URL;
-
   const handleSubmit = () => {
     // e.preventDefault();
     // add the bbooking in Bookings and navigate there
@@ -69,7 +68,10 @@ const Payment = () => {
     <div className="flex justify-center items-center h-screen ">
       <div className="flex flex-col  items-center bg-white h-1/2 w-96 p-4">
         <div>
-          <img src={`${BASE_URL}/tours/${tour.imageCover}`} alt={tour.name} />
+          <img
+            src={`${BASE_URL}/public/img/tours/${tour.imageCover}`}
+            alt={tour.name}
+          />
           <div className="flex flex-col gap-2 mt-6 ">
             <Heading>{tour.name}</Heading>
             <Heading>Price: ${tour.price} </Heading>

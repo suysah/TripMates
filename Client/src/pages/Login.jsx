@@ -1,5 +1,5 @@
 import { useMutation } from "@tanstack/react-query";
-import React, { useState } from "react";
+import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import useAuth from "../context/useAuth";
 import { toast } from "react-toastify";
@@ -16,7 +16,7 @@ const Login = () => {
   const mutateLogin = useMutation({
     mutationFn: async (loginInfo) => {
       const res = await fetch(
-        `${import.meta.env.BASE_URL}/api/v1/users/login`,
+        `${import.meta.env.VITE_BASE_URL}/api/v1/users/login`,
         {
           method: "POST",
           body: JSON.stringify(loginInfo),

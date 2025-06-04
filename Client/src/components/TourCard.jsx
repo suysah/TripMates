@@ -15,13 +15,13 @@ const TourCard = ({ tour }) => {
     year: "numeric",
   });
 
-  const BASE_URL = import.meta.env.VITE_API_BASE_URL;
+  const BASE_URL = import.meta.env.VITE_BASE_URL;
 
   return (
     <div className="border h-max w-[23rem] bg-white p-5 flex flex-col rounded-xl shadow-md  space-y-3 ">
       <img
         className="h-40 w-full object-cover rounded-xl"
-        src={`${BASE_URL}/tours/${tour.imageCover}`}
+        src={`${BASE_URL}/public/img/tours/${tour.imageCover}`}
         alt={`Cover image for ${tour.name}`}
         loading="lazy"
       />

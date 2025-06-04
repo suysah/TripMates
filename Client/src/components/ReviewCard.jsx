@@ -2,14 +2,14 @@ import React from "react";
 import { FaStar } from "react-icons/fa";
 
 const ReviewCard = ({ rev }) => {
-  const BASE_URL = import.meta.env.VITE_API_BASE_URL;
+  const BASE_URL = import.meta.env.VITE_BASE_URL;
 
   return (
     <div className="flex flex-col justify-center items-center h-72 min-w-72 max-w-72 gap-10 bg-white text-slate-700 p-4">
       {rev.user ? (
         <div className="flex justify-center items-center gap-4">
           <img
-            src={`${BASE_URL}/users/${rev?.user?.photo}`}
+            src={`${BASE_URL}/public/img/users/${rev?.user?.photo}`}
             alt="reviwer"
             className="h-8 w-8 rounded-full"
           />

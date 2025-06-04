@@ -14,7 +14,7 @@ const PasswordChange = () => {
     mutationKey: ["password"],
     mutationFn: async (password) => {
       const res = await fetch(
-        `${import.meta.env.BASE_URL}/api/v1/users/updatePassword`,
+        `${import.meta.env.VITE_BASE_URL}/api/v1/users/updatePassword`,
         {
           method: "PATCH",
           body: JSON.stringify(password),

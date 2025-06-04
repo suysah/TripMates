@@ -1,7 +1,7 @@
 import Heading from "./Ui/Heading";
 
 const TourGuidesInfo = ({ guides }) => {
-  const BASE_URL = import.meta.env.VITE_API_BASE_URL;
+  const BASE_URL = import.meta.env.VITE_BASE_URL;
 
   return (
     <div>
@@ -12,7 +12,7 @@ const TourGuidesInfo = ({ guides }) => {
             <div className="flex flex-col gap-3 pt-2" key={index}>
               <div className="flex justify-center items-center gap-3 text-gray-600">
                 <img
-                  src={`${BASE_URL}/users/${guide.photo}`}
+                  src={`${BASE_URL}/public/img/users/${guide.photo}`}
                   className="h-8 w-8 object-cover rounded-full"
                 />
                 <span className="font-bold text-black">

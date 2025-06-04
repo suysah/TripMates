@@ -8,7 +8,7 @@ const ChatBotWidget = () => {
       dfMessenger.setAttribute("chat-title", "toura-chatbot");
       dfMessenger.setAttribute(
         "agent-id",
-        `${import.meta.env.CHATBOT_AGENT_ID}`
+        `${import.meta.env.VITE_CHATBOT_AGENT_ID}`
       ); // Replace with your agent ID
       dfMessenger.setAttribute("language-code", "en");
       dfMessenger.style.width = "360px";

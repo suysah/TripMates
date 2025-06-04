@@ -8,7 +8,7 @@ import { toast } from "react-toastify";
 const Settings = () => {
   const { user } = useAuth();
   const queryClient = useQueryClient();
-  const BASE_URL = import.meta.env.VITE_API_BASE_URL;
+  const BASE_URL = import.meta.env.VITE_BASE_URL;
   const [userInfo, setUserInfo] = useState({
     name: user.name,
     email: user.email,
@@ -17,14 +17,11 @@ const Settings = () => {
 
   const mutateUser = useMutation({
     mutationFn: async (formData) => {
-      const res = await fetch(
-        `${import.meta.env.BASE_URL}/api/v1/users/updateMe`,
-        {
-          method: "PATCH",
-          body: formData,
-          credentials: "include",
-        }
-      );
+      const res = await fetch(`${BASE_URL}/api/v1/users/updateMe`, {
+        method: "PATCH",
+        body: formData,
+        credentials: "include",
+      });
       if (!res.ok) throw new Error("Updation failed!");
       return res.json();
     },
@@ -82,7 +79,7 @@ const Settings = () => {
           </label>
           <div className="flex justify-center items-center gap-6">
             <img
-              src={`${BASE_URL}/users/${user.photo}`}
+              src={`${BASE_URL}/public/img/users/${user.photo}`}
               alt="user DP"
               className="h-16 w-16 rounded-full"
             />{" "}
