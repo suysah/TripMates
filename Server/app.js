@@ -30,6 +30,7 @@ app.set('trust proxy', 1);
 // 1) GLOBAL MIDDLEWARES
 //implement cors
 const allowedOrigins = [
+  'https://trip-mates-yik2.vercel.app',
   'https://trip-mates-yik2-git-main-suysahs-projects.vercel.app',
   'http://localhost:5173',
   'https://trip-mates-yik2-devdrz2t2-suysahs-projects.vercel.app',
