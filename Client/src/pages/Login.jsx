@@ -9,8 +9,8 @@ const Login = () => {
   const { user, setUser } = useAuth();
 
   const [loginInfo, setLoginInfo] = useState({
-    email: "",
-    password: "",
+    email: "test@gmail.com",
+    password: "22222222",
   });
 
   const mutateLogin = useMutation({

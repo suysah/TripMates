@@ -133,7 +133,7 @@ const Details = () => {
         <div className="absolute inset-0 transform skew-y-6 bg-slate-200 z-0"></div>
 
         <div className="relative z-10 overflow-x-auto p-4 flex gap-20">
-          {reviews.map((review) => (
+          {reviews?.map((review) => (
             <ReviewCard key={review._id} rev={review} />
           ))}
         </div>

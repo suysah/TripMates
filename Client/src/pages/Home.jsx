@@ -1,12 +1,12 @@
-import React from "react";
 import TourCard from "../components/TourCard";
 import { useQuery } from "@tanstack/react-query";
+import { useCallback } from "react";
 
 const Home = () => {
-  const fetchHomeData = async () => {
+  const fetchHomeData = useCallback(async () => {
     const res = await fetch(`${import.meta.env.VITE_BASE_URL}/api/v1/tours/`);
     return res.json();
-  };
+  }, []);
 
   const { data, error, isLoading } = useQuery({
     queryKey: ["home"],

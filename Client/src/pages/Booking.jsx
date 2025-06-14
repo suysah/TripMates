@@ -33,7 +33,7 @@ const Booking = () => {
     <>
       <Heading>YOUR BOOKINGS</Heading>
       <div className="flex flex-col justify-center items-center gap-6 p-6">
-        {data.tours.map((tour, index) => (
+        {data.tours?.map((tour, index) => (
           <TourCard tour={tour} key={index} />
         ))}
       </div>

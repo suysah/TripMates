@@ -1,10 +1,11 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useMemo } from "react";
 import { useQuery } from "@tanstack/react-query";
 import { AuthContext } from "./useAuth";
 
 const fetchUser = async () => {
   const res = await fetch(`${import.meta.env.VITE_BASE_URL}/api/v1/users/me`, {
-    credentials: "include",
+    method: "GET",
+    credentials: "include", // ✅ must include this
   });
 
   if (!res.ok) throw new Error("Not authenticated");
@@ -18,9 +19,9 @@ const AuthProvider = ({ children }) => {
   const { data, error } = useQuery({
     queryKey: ["userinfo"],
     queryFn: fetchUser,
-    staleTime: 10 * 60 * 1000, // 10 minutes
+    enabled: !user, // avoid re-fetch if already set
+    staleTime: 5 * 60 * 1000,
   });
-  console.log("data", data);
 
   useEffect(() => {
     if (data?.data) {
@@ -32,13 +33,9 @@ const AuthProvider = ({ children }) => {
     }
   }, [data, error]);
 
-  console.log("user", user?.name);
+  const value = useMemo(() => ({ setUser, user, loading }), [user, loading]);
 
-  return (
-    <AuthContext.Provider value={{ setUser, user, loading }}>
-      {children}
-    </AuthContext.Provider>
-  );
+  return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
 };
 
 export default AuthProvider;

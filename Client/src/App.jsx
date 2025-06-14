@@ -23,10 +23,10 @@ function App() {
       <BrowserRouter>
         <Routes>
           <Route path="/login" element={<Login />} />
+          <Route path="/signup" element={<SignUp />} />
           <Route path="/" element={<AppLayout />} />
           <Route element={<PrivateRoute />}>
             <Route path="/details/:id" element={<Details />} />
-            <Route path="/signup" element={<SignUp />} />
             <Route path="/account" element={<Account />}>
               <Route index element={<Settings />} />
               <Route path="settings" element={<Settings />} />
