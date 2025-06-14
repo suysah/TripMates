@@ -2,6 +2,8 @@ const express = require('express');
 const router = express.Router();
 const viewsController = require('../controllers/viewsController');
 const authController = require('../controllers/authController');
+const cors = require('cors');
+
 router.options('*', cors());
 
 // const bookingController = require('../controllers/bookingController');

@@ -1,10 +1,7 @@
 const express = require('express');
-
 const router = express.Router();
-
 const tourController = require('../controllers/tourController');
 const authController = require('./../controllers/authController');
-// const reviewController = require('../controllers/reviewController');
 const reviewRouter = require('./reviewRoutes');
 const {
   aliasTopTours,
@@ -16,6 +13,7 @@ const {
   getTourStats,
   getMonthlyPlan,
 } = tourController;
+const cors = require('cors');
 
 router.options('*', cors());
 

@@ -2,6 +2,7 @@ const express = require('express');
 const reviewController = require('./../controllers/reviewController');
 const authController = require('./../controllers/authController');
 const router = express.Router({ mergeParams: true }); //to get the parameter from the parent router
+const cors = require('cors');
 
 //POSt /tours/579873/reviews
 //POSt /reviews

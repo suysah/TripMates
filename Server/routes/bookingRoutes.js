@@ -1,9 +1,9 @@
 const express = require('express');
-
 const router = express.Router();
-
+const cors = require('cors');
 const bookingController = require('../controllers/bookingController');
 const authController = require('../controllers/authController');
+
 router.options('*', cors());
 
 router.use(authController.protect);

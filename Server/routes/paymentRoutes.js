@@ -1,10 +1,11 @@
 const express = require('express');
+const cors = require('cors');
 
 const router = express.Router();
+router.options('*', cors());
 
 const authController = require('./../controllers/authController');
 const paymentController = require('./../controllers/paymentController');
-router.options('*', cors());
 
 router.post(
   '/get-payment',
