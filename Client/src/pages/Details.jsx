@@ -9,6 +9,7 @@ import Footer from "../components/Footer";
 import { useParams } from "react-router-dom";
 import { useQuery } from "@tanstack/react-query";
 import MapView from "../components/Ui/MapView";
+import Spinner from "../components/Spinner";
 
 const Details = () => {
   const BASE_URL = import.meta.env.VITE_BASE_URL;
@@ -40,7 +41,7 @@ const Details = () => {
   };
 
   const { data, error, isLoading } = useQuery({
-    queryKey: ["detail"],
+    queryKey: [`detail`, id],
     queryFn: fetchDetails,
   });
 
@@ -49,11 +50,11 @@ const Details = () => {
     error: reviewError,
     isLoading: isLoadingReviews,
   } = useQuery({
-    queryKey: ["reviews"],
+    queryKey: [`reviews`, id],
     queryFn: fetchReviews,
   });
 
-  if (isLoading || isLoadingReviews) return "Loading...";
+  if (isLoading || isLoadingReviews) return <Spinner />;
 
   if (error) return "An error has occurred " + error.message;
   if (reviewError)
@@ -70,7 +71,7 @@ const Details = () => {
         className={`gap-10 rounded-br-[18vw] flex flex-col justify-center items-center bg-cover  bg-no-repeat relative w-full h-64 md:h-96`}
       >
         <img
-          src={`${BASE_URL}/public/img/tours/${tour.imageCover}`}
+          src={`${BASE_URL}/public/img/tours/${tour?.imageCover}`}
           alt="Tour Cover"
           className="absolute inset-0 w-full h-full object-cover rounded-br-[18vw]"
           loading="lazy"

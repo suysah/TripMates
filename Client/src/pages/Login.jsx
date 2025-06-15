@@ -7,6 +7,7 @@ import { toast } from "react-toastify";
 const Login = () => {
   const navigate = useNavigate();
   const { user, setUser } = useAuth();
+  const [disableBtn, setDisableBtn] = useState(false);
 
   const [loginInfo, setLoginInfo] = useState({
     email: "test@gmail.com",
@@ -15,6 +16,7 @@ const Login = () => {
 
   const mutateLogin = useMutation({
     mutationFn: async (loginInfo) => {
+      setDisableBtn(true);
       const res = await fetch(
         `${import.meta.env.VITE_BASE_URL}/api/v1/users/login`,
         {
@@ -32,6 +34,8 @@ const Login = () => {
       return res.json();
     },
     onSuccess: (data) => {
+      setDisableBtn(false);
+
       setUser(data.data.user);
       toast.success("Login successfull");
       // console.log("Login successful", data);
@@ -40,6 +44,7 @@ const Login = () => {
       }, 2000);
     },
     onError: (error) => {
+      setDisableBtn(false);
       toast.error("Error:" + error.message);
       // console.log("There was an error:", error.message);
     },
@@ -84,9 +89,10 @@ const Login = () => {
           />
           <button
             type="submit"
+            disabled={disableBtn}
             className="bg-green-500 text-white px-4 py-1 rounded-md"
           >
-            Login
+            {disableBtn ? "Logging.." : "Login"}
           </button>
         </form>
       </div>

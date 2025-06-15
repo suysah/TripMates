@@ -1,11 +1,49 @@
 import Heading from "../components/Ui/Heading";
 import ReviewCard from "../components/ReviewCard";
+import { useQuery } from "@tanstack/react-query";
+import Spinner from "../components/Spinner";
+
+const fetchReviews = async () => {
+  const res = await fetch(
+    `${import.meta.env.VITE_BASE_URL}/api/v1/reviews/reviewsByUser`,
+    {
+      method: "GET",
+      credentials: "include",
+    }
+  );
+
+  if (!res.ok) throw new Error("Error");
+  const data = await res.json();
+
+  return data;
+};
 
 const MyReviews = () => {
+  const {
+    data: reviews,
+    isLoading,
+    error,
+  } = useQuery({
+    queryKey: ["reviews"],
+    queryFn: fetchReviews,
+  });
+
+  console.log("hehh", reviews.data);
+  if (isLoading) return <Spinner />;
+  if (error) return "Error" + error.message;
+
   return (
     <div className="pt-2">
       <Heading>YOUR REVIEWS</Heading>
-      <div className="flex flex-wrap justify-center items-center p-6 gap-6 "></div>
+      <div className="flex flex-wrap justify-center items-center p-6 gap-6 ">
+        {reviews.data.length === 0 ? (
+          <Heading>NO reviews yet!</Heading>
+        ) : (
+          reviews.data.map((rev, ind) => {
+            return <ReviewCard rev={rev} key={ind} inReviews={true} />;
+          })
+        )}
+      </div>
     </div>
   );
 };

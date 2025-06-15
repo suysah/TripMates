@@ -13,6 +13,7 @@ import MyReviews from "./pages/MyReviews";
 import Payment from "./pages/Payment";
 import PrivateRoute from "./components/PrivateRoute";
 import ChatBotWidget from "./components/Ui/ChatBotWidget";
+import AddReview from "./components/AddReview";
 
 function App() {
   return (
@@ -27,6 +28,7 @@ function App() {
           <Route path="/" element={<AppLayout />} />
           <Route element={<PrivateRoute />}>
             <Route path="/details/:id" element={<Details />} />
+            <Route path="review/:id" element={<AddReview />} />
             <Route path="/account" element={<Account />}>
               <Route index element={<Settings />} />
               <Route path="settings" element={<Settings />} />

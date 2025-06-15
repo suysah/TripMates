@@ -1,11 +1,11 @@
-import React from "react";
 import { FaStar } from "react-icons/fa";
+import Heading from "./Ui/Heading";
 
-const ReviewCard = ({ rev }) => {
+const ReviewCard = ({ rev, inReviews = false }) => {
   const BASE_URL = import.meta.env.VITE_BASE_URL;
 
   return (
-    <div className="flex flex-col justify-center items-center h-72 min-w-72 max-w-72 gap-10 bg-white text-slate-700 p-4">
+    <div className="flex flex-col justify-center items-center min-h-72 max-h-max min-w-72 max-w-72 gap-10 bg-white text-slate-700 p-4">
       {rev.user ? (
         <div className="flex justify-center items-center gap-4">
           <img
@@ -33,6 +33,16 @@ const ReviewCard = ({ rev }) => {
         <FaStar />
         <FaStar />
       </div>
+      {inReviews && (
+        <div className="flex gap-6 ">
+          <button className="bg-teal-900 text-white px-4 py-1 rounded-md">
+            Update
+          </button>
+          <button className="bg-teal-900 text-white px-4 py-1 rounded-md">
+            Delete
+          </button>
+        </div>
+      )}
     </div>
   );
 };

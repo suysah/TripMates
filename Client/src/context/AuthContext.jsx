@@ -19,7 +19,6 @@ const AuthProvider = ({ children }) => {
   const { data, error } = useQuery({
     queryKey: ["userinfo"],
     queryFn: fetchUser,
-    enabled: !user, // avoid re-fetch if already set
     staleTime: 5 * 60 * 1000,
   });
 

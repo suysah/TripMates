@@ -1,8 +1,8 @@
-import React from "react";
 import Heading from "../components/Ui/Heading";
 import { useNavigate, useParams } from "react-router-dom";
-import { useMutation, useQuery } from "@tanstack/react-query";
+import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { toast } from "react-toastify";
+import Spinner from "../components/Spinner";
 
 const addBooking = async (booking) => {
   const res = await fetch(`${import.meta.env.VITE_BASE_URL}/api/v1/bookings/`, {
@@ -18,6 +18,7 @@ const addBooking = async (booking) => {
 };
 
 const Payment = () => {
+  const queryClient = useQueryClient();
   const BASE_URL = import.meta.env.VITE_BASE_URL;
   const { id } = useParams();
   const navigate = useNavigate();
@@ -39,7 +40,7 @@ const Payment = () => {
     error,
     isLoading,
   } = useQuery({
-    queryKey: ["detail"],
+    queryKey: ["payment_details"],
     queryFn: fetchDetails,
   });
 
@@ -47,6 +48,7 @@ const Payment = () => {
     mutationFn: addBooking,
     onSuccess: () => {
       // console.log("item added", data);
+      queryClient.invalidateQueries("my-tours");
       toast.success("Booking successfull 🎉");
       navigate("/account/bookings");
     },
@@ -55,7 +57,7 @@ const Payment = () => {
     },
   });
 
-  if (isLoading) return "Loading";
+  if (isLoading) return <Spinner/> ;
   if (error) return "error" + error.message;
 
   const handleSubmit = () => {
@@ -68,10 +70,15 @@ const Payment = () => {
     <div className="flex justify-center items-center h-screen ">
       <div className="flex flex-col  items-center bg-white h-1/2 w-96 p-4">
         <div>
-          <img
-            src={`${BASE_URL}/public/img/tours/${tour.imageCover}`}
-            alt={tour.name}
-          />
+          {isLoading ? (
+            "Loading.."
+          ) : (
+            <img
+              src={`${BASE_URL}/public/img/tours/${tour.imageCover}`}
+              alt={tour.name}
+              loading="lazy"
+            />
+          )}
           <div className="flex flex-col gap-2 mt-6 ">
             <Heading>{tour.name}</Heading>
             <Heading>Price: ${tour.price} </Heading>

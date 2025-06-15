@@ -6,7 +6,7 @@ import {
 } from "react-icons/fa";
 import { Link } from "react-router-dom";
 
-const TourCard = ({ tour }) => {
+const TourCard = ({ tour, inBooking = false }) => {
   const dateStr = tour.startDates[0];
   const date = new Date(dateStr);
 
@@ -52,11 +52,20 @@ const TourCard = ({ tour }) => {
       </div>
       <div className="font-bold">$ {tour.price} per person </div>
       <div className="text-sm">Rating: {tour.ratingsAverage} </div>
-      <Link to={`/details/${tour.id}`}>
-        <button className="bg-teal-900 text-white px-4 py-1 rounded-md">
-          Details
-        </button>
-      </Link>
+      <div className="flex justify-evenly ">
+        <Link to={`/details/${tour.id}`}>
+          <button className="bg-teal-900 text-white px-4 py-1 rounded-md">
+            Details
+          </button>
+        </Link>
+        {inBooking && (
+          <Link to={`/review/${tour.id}`}>
+            <button className="bg-teal-900 text-white px-4 py-1 rounded-md">
+              Add Review
+            </button>
+          </Link>
+        )}
+      </div>
     </div>
   );
 };

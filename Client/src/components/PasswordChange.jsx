@@ -9,6 +9,7 @@ const PasswordChange = () => {
     newPassword: "",
     passwordConfirm: "",
   });
+  const [disBtn, setDisBtn] = useState(false);
 
   const mutatePassword = useMutation({
     mutationKey: ["password"],
@@ -29,10 +30,12 @@ const PasswordChange = () => {
     },
     onSuccess: () => {
       //   console.log(data, "password updated successfully");
+      setDisBtn(false);
       toast.success("Password changed successfull");
     },
     onError: (error) => {
       //   console.log("Error:", error.message);
+      setDisBtn(false);
       toast.success("Error : " + error.message);
     },
   });
@@ -45,6 +48,7 @@ const PasswordChange = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    setDisBtn(true);
     mutatePassword.mutate(password);
     setPassword({ currentPassword: "", newPassword: "", passwordConfirm: "" });
   };
@@ -89,8 +93,11 @@ const PasswordChange = () => {
             />
           </label>
           <div className="flex w-full justify-end ">
-            <button className="bg-teal-700 rounded-full text-white py-3 px-4 font-semibold">
-              SAVE PASSWORD
+            <button
+              disabled={disBtn}
+              className="bg-teal-700 rounded-full text-white py-3 px-4 font-semibold"
+            >
+              {disBtn ? "SAVING..." : "SAVE PASSWORD"}
             </button>
           </div>
         </form>

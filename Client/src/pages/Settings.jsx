@@ -9,6 +9,7 @@ const Settings = () => {
   const { user } = useAuth();
   const queryClient = useQueryClient();
   const BASE_URL = import.meta.env.VITE_BASE_URL;
+  const [disBtn, setDisBtn] = useState(false);
   const [userInfo, setUserInfo] = useState({
     name: user.name,
     email: user.email,
@@ -26,11 +27,13 @@ const Settings = () => {
       return res.json();
     },
     onSuccess: () => {
+      setDisBtn(false);
       queryClient.invalidateQueries("userinfo");
       toast.success("updation successfull");
       // console.log("updation successfull", data);
     },
     onError: (error) => {
+      setDisBtn(false);
       // console.log("Error" + error.message);
       toast.success("Error : " + error.message);
     },
@@ -45,6 +48,7 @@ const Settings = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    setDisBtn(true);
     const formData = new FormData();
     formData.append("name", userInfo.name);
     formData.append("email", userInfo.email);
@@ -91,13 +95,16 @@ const Settings = () => {
             />
           </div>
           <div className="flex justify-end">
-            <button className="bg-teal-700 rounded-full text-white py-3 px-4 font-semibold">
-              SAVE SETTINGS
+            <button
+              disabled={disBtn}
+              className="bg-teal-700 rounded-full text-white py-3 px-4 font-semibold"
+            >
+              {disBtn ? "SAVING..." : "SAVE SETTINGS"}
             </button>
           </div>
         </form>
       </div>
-      <PasswordChange />
+      <PasswordChange disBtn={disBtn} />
     </div>
   );
 };

@@ -11,18 +11,17 @@ router.options('*', cors());
 
 router.use(authController.protect);
 
+router.route('/').get(reviewController.getAllReviews);
+router.route('/reviewsByUser').get(reviewController.getReviewsBYUser);
+
 router
-  .route('/')
+  .route('/:id')
+  .get(reviewController.getReview)
   .post(
     authController.restrictTo('user'),
     reviewController.setTourUserIds,
     reviewController.createReview
   )
-  .get(reviewController.getAllReviews);
-
-router
-  .route('/:id')
-  .get(reviewController.getReview)
   .patch(
     authController.restrictTo('user', 'admin'),
     reviewController.updateReview
