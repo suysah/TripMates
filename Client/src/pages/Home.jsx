@@ -12,6 +12,10 @@ const Home = () => {
   const { data, error, isLoading } = useQuery({
     queryKey: ["home"],
     queryFn: fetchHomeData,
+    staleTime: 1000 * 60 * 5, // 5 minutes
+    cacheTime: 1000 * 60 * 10, // cache lives for 10 min
+    refetchOnWindowFocus: false, // don't refetch on tab focus
+    refetchOnMount: false,
   });
 
   console.log(data);

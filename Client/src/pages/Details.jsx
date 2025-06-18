@@ -18,9 +18,7 @@ const Details = () => {
   const fetchDetails = async () => {
     const res = await fetch(`${BASE_URL}/api/v1/tours/${id}`, {
       method: "GET",
-      headers: {
-        "content-type": "application/json",
-      },
+      headers: { "content-type": "application/json" },
       credentials: "include",
     });
     const data = await res.json();
@@ -30,9 +28,7 @@ const Details = () => {
   const fetchReviews = async () => {
     const res = await fetch(`${BASE_URL}/api/v1/reviews/`, {
       method: "GET",
-      headers: {
-        "content-type": "application/json",
-      },
+      headers: { "content-type": "application/json" },
       credentials: "include",
     });
     const data = await res.json();
@@ -41,7 +37,7 @@ const Details = () => {
   };
 
   const { data, error, isLoading } = useQuery({
-    queryKey: [`detail`, id],
+    queryKey: ["detail", id],
     queryFn: fetchDetails,
   });
 
@@ -50,12 +46,11 @@ const Details = () => {
     error: reviewError,
     isLoading: isLoadingReviews,
   } = useQuery({
-    queryKey: [`reviews`, id],
+    queryKey: ["reviews", id],
     queryFn: fetchReviews,
   });
 
   if (isLoading || isLoadingReviews) return <Spinner />;
-
   if (error) return "An error has occurred " + error.message;
   if (reviewError)
     return (

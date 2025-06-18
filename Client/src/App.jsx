@@ -14,12 +14,13 @@ import Payment from "./pages/Payment";
 import PrivateRoute from "./components/PrivateRoute";
 import ChatBotWidget from "./components/Ui/ChatBotWidget";
 import AddReview from "./components/AddReview";
+import Billing from "./pages/Billing";
 
 function App() {
   return (
     <>
       <ToastContainer />
-      <ChatBotWidget />
+      {/* <ChatBotWidget /> */}
 
       <BrowserRouter>
         <Routes>
@@ -34,7 +35,7 @@ function App() {
               <Route path="settings" element={<Settings />} />
               <Route path="bookings" element={<Booking />} />
               <Route path="reviews" element={<MyReviews />} />
-              <Route path="billing" element={<MyReviews />} />
+              <Route path="billing" element={<Billing />} />
             </Route>
             <Route path="/payment/:id" element={<Payment />} />
           </Route>
