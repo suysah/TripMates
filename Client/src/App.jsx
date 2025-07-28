@@ -20,7 +20,7 @@ function App() {
   return (
     <>
       <ToastContainer />
-      {/* <ChatBotWidget /> */}
+      <ChatBotWidget />
 
       <BrowserRouter>
         <Routes>

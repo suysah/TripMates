@@ -38,7 +38,10 @@ const Login = () => {
 
       setUser(data.data.user);
       toast.success("Login successfull");
-      // console.log("Login successful", data);
+      toast.success(
+        "This site uses third-party cookie if disabled please enable them.",
+        { autoClose: 10000 }
+      );
       setTimeout(() => {
         navigate("/");
       }, 2000);
@@ -46,7 +49,6 @@ const Login = () => {
     onError: (error) => {
       setDisableBtn(false);
       toast.error("Error:" + error.message);
-      // console.log("There was an error:", error.message);
     },
   });
 

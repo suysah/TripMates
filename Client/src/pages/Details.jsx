@@ -15,29 +15,34 @@ const Details = () => {
   const BASE_URL = import.meta.env.VITE_BASE_URL;
   const { id } = useParams();
 
+  // Fetch tour details
   const fetchDetails = async () => {
     const res = await fetch(`${BASE_URL}/api/v1/tours/${id}`, {
       method: "GET",
-      headers: { "content-type": "application/json" },
+      headers: { "Content-Type": "application/json" },
       credentials: "include",
     });
     const data = await res.json();
-    return data;
+    return data?.data?.data;
   };
 
+  // Fetch reviews
   const fetchReviews = async () => {
     const res = await fetch(`${BASE_URL}/api/v1/reviews/`, {
       method: "GET",
-      headers: { "content-type": "application/json" },
+      headers: { "Content-Type": "application/json" },
       credentials: "include",
     });
     const data = await res.json();
-    const rev = data.data.data.filter((review) => review.tour === id);
-    return rev;
+    return data.data.data.filter((review) => review.tour === id);
   };
 
-  const { data, error, isLoading } = useQuery({
-    queryKey: ["detail", id],
+  const {
+    data: tour,
+    error: tourError,
+    isLoading: isLoadingTour,
+  } = useQuery({
+    queryKey: ["tourDetails", id],
     queryFn: fetchDetails,
   });
 
@@ -50,14 +55,22 @@ const Details = () => {
     queryFn: fetchReviews,
   });
 
-  if (isLoading || isLoadingReviews) return <Spinner />;
-  if (error) return "An error has occurred " + error.message;
-  if (reviewError)
+  if (isLoadingTour || isLoadingReviews) return <Spinner />;
+
+  if (tourError || reviewError)
     return (
-      "An error has occurred while fetching reviews " + reviewError.message
+      <div className="flex justify-center items-center h-screen text-red-500">
+        {tourError ? "Failed to load tour details" : "Failed to load reviews"}
+      </div>
     );
 
-  const tour = data?.data?.data;
+  if (!tour) {
+    return (
+      <div className="flex justify-center items-center h-screen text-red-500">
+        Tour not found
+      </div>
+    );
+  }
 
   return (
     <div>
