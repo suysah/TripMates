@@ -18,7 +18,7 @@ const Home = () => {
     refetchOnMount: false,
   });
 
-  console.log(data);
+  // console.log(data);
 
   if (isLoading) return <Spinner />;
 

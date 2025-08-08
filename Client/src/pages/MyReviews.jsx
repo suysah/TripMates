@@ -26,7 +26,7 @@ const MyReviews = () => {
     queryFn: fetchReviews,
   });
 
-  console.log("rev", reviews);
+  // console.log("rev", reviews);
 
   if (isLoading) return <Spinner />;
   if (error) return "Error: " + error.message;

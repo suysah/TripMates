@@ -31,7 +31,7 @@ const importData = async () => {
     // await Tour.create(tours, { validateBeforeSave: false });
     // await User.create(users, { validateBeforeSave: false });
     await Review.create(reviews);
-    console.log('data imported');
+    // console.log('data imported');
     process.exit();
   } catch (error) {
     console.log(error);

@@ -22,7 +22,22 @@ exports.getAllReviews = factory.getAll(Review);
 
 exports.getReview = factory.getOne(Review);
 
-exports.createReview = factory.createOne(Review);
+exports.createReview = catchAsync(async (req, res, next) => {
+  const { review, rating, tour, user } = req.body;
+
+  if (!review || !rating || !tour || !user) {
+    return res.status(400).json({ message: 'Missing required fields' });
+  }
+
+  const newReview = await Review.create({ review, rating, tour, user });
+
+  res.status(201).json({
+    status: 'success',
+    data: {
+      review: newReview,
+    },
+  });
+});
 
 exports.updateReview = factory.updateOne(Review);
 

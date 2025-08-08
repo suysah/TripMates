@@ -25,30 +25,26 @@ const Login = () => {
           headers: {
             "content-type": "application/json",
           },
-          credentials: "include", // Optional but common if you use cookies/session
+          credentials: "include",
         }
       );
 
-      if (!res.ok) throw new Error("Incorrect email or password ");
+      if (!res.ok) throw new Error("Incorrect email or password");
 
       return res.json();
     },
     onSuccess: (data) => {
       setDisableBtn(false);
-
       setUser(data.data.user);
-      toast.success("Login successfull");
-      toast.success(
-        "This site uses third-party cookie if disabled please enable them.",
-        { autoClose: 10000 }
+      toast.success("Login successful");
+      toast.info(
+        "This site uses third-party cookies.please enable them on your browser."
       );
-      setTimeout(() => {
-        navigate("/");
-      }, 2000);
+      setTimeout(() => navigate("/"), 2000);
     },
     onError: (error) => {
       setDisableBtn(false);
-      toast.error("Error:" + error.message);
+      toast.error("Error: " + error.message);
     },
   });
 
@@ -67,36 +63,54 @@ const Login = () => {
   };
 
   return (
-    <div className="h-full mt-24 flex justify-center items-center">
-      <div className="w-11/12 sm:w-2/3 md:w-1/2 lg:w-1/3 p-5 flex flex-col rounded-xl shadow-md space-y-3 sm:border">
-        <h2 className="text-xl font-bold my-4">Login</h2>
-        <form onSubmit={handleSubmit} className="flex flex-col gap-6">
-          <input
-            className="px-2 py-1 border-2"
-            type="email"
-            name="email"
-            value={loginInfo.email}
-            placeholder="Email"
-            onChange={handleChange}
-            required
-          />
-          <input
-            className="px-2 py-1 border-2"
-            type="password"
-            name="password"
-            value={loginInfo.password}
-            placeholder="Password"
-            onChange={handleChange}
-            required
-          />
+    <div className="min-h-screen bg-gray-50 flex items-center justify-center px-4">
+      <div className="w-full max-w-md p-8 rounded-xl bg-white shadow-xl">
+        <h2 className="text-2xl font-bold text-center mb-6 text-gray-800">
+          Login
+        </h2>
+        <form onSubmit={handleSubmit} className="space-y-5">
+          <div>
+            <input
+              type="email"
+              name="email"
+              value={loginInfo.email}
+              onChange={handleChange}
+              required
+              placeholder="Enter your email"
+              className="w-full mt-1 px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-400 outline-none"
+            />
+          </div>
+
+          <div>
+            <input
+              type="password"
+              name="password"
+              value={loginInfo.password}
+              onChange={handleChange}
+              required
+              placeholder="Enter your password"
+              className="w-full mt-1 px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-400 outline-none"
+            />
+          </div>
+
           <button
             type="submit"
             disabled={disableBtn}
-            className="bg-green-500 text-white px-4 py-1 rounded-md"
+            className="w-full bg-green-500 hover:bg-green-600 text-white font-semibold py-2 rounded-lg transition duration-300"
           >
-            {disableBtn ? "Logging.." : "Login"}
+            {disableBtn ? "Logging in..." : "Login"}
           </button>
         </form>
+
+        <p className="text-center mt-4 text-sm text-gray-600">
+          Don’t have an account?{" "}
+          <span
+            onClick={() => navigate("/signup")}
+            className="text-green-600 hover:underline cursor-pointer"
+          >
+            Sign up
+          </span>
+        </p>
       </div>
     </div>
   );

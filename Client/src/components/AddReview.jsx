@@ -1,7 +1,7 @@
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { useEffect, useRef, useState } from "react";
 import { toast } from "react-toastify";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import Spinner from "./Spinner";
 import Heading from "./Ui/Heading";
 import StarRating from "./StarRating";
@@ -17,6 +17,7 @@ const AddReview = () => {
   const BASE_URL = import.meta.env.VITE_BASE_URL;
   const { user } = useAuth();
   const reviewID = useRef(null);
+  const navigate = useNavigate();
   // console.log(user);
 
   //functions ------------------------------------------------------------
@@ -32,14 +33,25 @@ const AddReview = () => {
   };
 
   const postReview = async (review) => {
+    if (!review.review || !review.rating) {
+      throw new Error("Review text and rating are required.");
+    }
+
     const res = await fetch(`${BASE_URL}/api/v1/reviews/${id}`, {
       method: "POST",
+      headers: {
+        "content-Type": "application/json",
+      },
       body: JSON.stringify(review),
-      headers: { "content-type": "application/json" },
       credentials: "include",
     });
+
     const data = await res.json();
-    if (!res.ok) throw new Error(data.message || "Failed to post review");
+
+    if (!res.ok) {
+      throw new Error(data.message || "Failed to post review");
+    }
+
     return data;
   };
 
@@ -64,17 +76,18 @@ const AddReview = () => {
   });
 
   const tour = data?.data?.data;
+  // console.log(tour);
 
   //checking if review already exist by user
   useEffect(() => {
+    if (!tour || !user?._id) return;
+
     const revByUserExist = tour?.reviews.find(
-      (rev) => user._id === rev.user._id
+      (rev) => rev?.user?._id && user._id === rev.user._id
     );
 
-    // console.log("khslkhalkhdlkhj", revByUserExist);
-
     if (revByUserExist) {
-      reviewID.current = revByUserExist.id;
+      reviewID.current = revByUserExist._id;
       setReviewExist(true);
       setRating(revByUserExist.rating);
       setReview(revByUserExist.review);
@@ -92,10 +105,13 @@ const AddReview = () => {
       queryClient.invalidateQueries({ queryKey: ["user-reviews"] });
       queryClient.invalidateQueries({ queryKey: ["reviews", id] });
       queryClient.invalidateQueries({ queryKey: ["detail", id] });
+      navigate("/account/reviews");
     },
     onError: (error) => {
       setIsUploading(false);
-      toast.error(`Error: ${error.message}`);
+      // console.log(error);
+
+      toast.error(`Error: ${error}`);
     },
   });
 
@@ -119,8 +135,8 @@ const AddReview = () => {
 
   const handleUpdate = (e) => {
     e.preventDefault();
-    console.log("rat: ", rating);
-    console.log("review: ", review);
+    // console.log("rat: ", rating);
+    // console.log("review: ", review);
     setIsUploading(true);
     patchReview.mutate({
       id: reviewID.current,

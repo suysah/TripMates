@@ -6,7 +6,7 @@ import { Link } from "react-router-dom";
 const ReviewCard = ({ rev, inReviews = false }) => {
   const BASE_URL = import.meta.env.VITE_BASE_URL;
   const queryClient = useQueryClient();
-  console.log(rev.id);
+  // console.log(rev.id);
 
   const deleteReview = useMutation({
     mutationFn: async (id) => {
