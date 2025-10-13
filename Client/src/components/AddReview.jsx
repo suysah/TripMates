@@ -157,7 +157,7 @@ const AddReview = () => {
 
   return (
     <div className="h-screen flex flex-col gap-20 justify-center items-center">
-      <Heading> Add/Update reviews </Heading>
+      <Heading> Add a review </Heading>
       <div className="border h-max w-[23rem] bg-white p-5 flex flex-col rounded-xl shadow-md  space-y-3 ">
         <img
           className="h-40 w-full object-cover rounded-xl"

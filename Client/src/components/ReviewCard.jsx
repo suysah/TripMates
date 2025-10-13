@@ -1,12 +1,18 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { toast } from "react-toastify";
 import ShowRating from "./ShowRating";
-import { Link } from "react-router-dom";
+import ModalAddUpdate from "./Ui/ModalAddUpdate";
+import StarRating from "./StarRating";
+import { useState } from "react";
 
 const ReviewCard = ({ rev, inReviews = false }) => {
   const BASE_URL = import.meta.env.VITE_BASE_URL;
   const queryClient = useQueryClient();
   // console.log(rev.id);
+
+  const [isOpen, setIsOpen] = useState(false);
+  const [review, setReview] = useState(rev?.review || "");
+  const [rating, setRating] = useState(rev?.rating || 0);
 
   const deleteReview = useMutation({
     mutationFn: async (id) => {
@@ -31,6 +37,33 @@ const ReviewCard = ({ rev, inReviews = false }) => {
 
   const handleDelete = () => {
     deleteReview.mutate(rev.id);
+  };
+
+  const patchReview = useMutation({
+    mutationFn: async ({ id, reviewData }) => {
+      const res = await fetch(`${BASE_URL}/api/v1/reviews/${id}`, {
+        method: "PATCH",
+        body: JSON.stringify(reviewData),
+        headers: { "content-type": "application/json" },
+        credentials: "include",
+      });
+      const data = await res.json();
+      if (!res.ok) throw new Error(data.message || "Failed to update review");
+      return data;
+    },
+    onSuccess: () => {
+      toast.success("Review updated successfully");
+      queryClient.invalidateQueries({ queryKey: ["user-reviews"] });
+      queryClient.invalidateQueries({ queryKey: ["reviews"] });
+      queryClient.invalidateQueries({ queryKey: ["detail"] });
+      setIsOpen(false);
+    },
+    onError: (error) => toast.error(error.message),
+  });
+
+  const handleSave = (e) => {
+    e.preventDefault();
+    patchReview.mutate({ id: rev.id, reviewData: { review, rating } });
   };
 
   return (
@@ -60,11 +93,12 @@ const ReviewCard = ({ rev, inReviews = false }) => {
       </div>
       {inReviews && (
         <div className="flex gap-6 ">
-          <Link to={`/review/${rev.tour}`}>
-            <button className="bg-teal-900 text-white px-4 py-1 rounded-md">
-              Update
-            </button>
-          </Link>
+          <button
+            onClick={() => setIsOpen(true)}
+            className="bg-teal-900 text-white px-4 py-1 rounded-md"
+          >
+            Edit
+          </button>
           <button
             onClick={handleDelete}
             className="bg-teal-900 text-white px-4 py-1 rounded-md"
@@ -73,6 +107,41 @@ const ReviewCard = ({ rev, inReviews = false }) => {
           </button>
         </div>
       )}
+
+      <ModalAddUpdate isOpen={isOpen} onClose={() => setIsOpen(false)}>
+        <form onSubmit={handleSave} className="flex flex-col gap-3">
+          <label className="flex flex-col gap-1">
+            <span className="text-sm font-semibold">Your review</span>
+            <textarea
+              className="border rounded p-2"
+              rows={4}
+              value={review}
+              onChange={(e) => setReview(e.target.value)}
+              required
+            />
+          </label>
+          <div className="flex items-center gap-2">
+            <span className="text-sm font-semibold">Your rating:</span>
+            <StarRating rating={rating} setRating={setRating} />
+          </div>
+          <div className="flex justify-end gap-2 mt-2">
+            <button
+              type="button"
+              onClick={() => setIsOpen(false)}
+              className="px-4 py-2 rounded border"
+            >
+              Cancel
+            </button>
+            <button
+              type="submit"
+              disabled={patchReview.isLoading}
+              className="bg-teal-700 text-white px-4 py-2 rounded"
+            >
+              {patchReview.isLoading ? "Saving..." : "Save"}
+            </button>
+          </div>
+        </form>
+      </ModalAddUpdate>
     </div>
   );
 };

@@ -7,10 +7,15 @@ router.options('*', cors());
 const authController = require('./../controllers/authController');
 const paymentController = require('./../controllers/paymentController');
 
-router.post(
-  '/get-payment',
-  authController.protect,
-  paymentController.getPayment
-);
+router.use(authController.protect);
+
+// Legacy route
+router.post('/get-payment', paymentController.getPayment);
+
+// Create a payment (bill)
+router.post('/', paymentController.createPayment);
+
+// Get my payments (bills)
+router.get('/me', paymentController.getMyPayments);
 
 module.exports = router;
