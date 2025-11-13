@@ -1,1 +1,166 @@
+{
+  "info": {
+    "title": "User API (Incomplete Version)",
+    "version": "0.1.0",
+    "description": "This version of the spec intentionally contains missing fields, datatypes, and validations."
+  },
+  "servers": [
+    {
+      "url": "https://api.example.com/v1"
+    }
+  ],
+  "paths": {
+    "/users": {
+      "post": {
+        "summary": "Create user",
+        "description": "Creates a user (some fields missing validation for testing).",
+        "operationId": "createUser",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UserCreateRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Created",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UserResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request"
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "UserCreateRequest": {
+        "type": "object",
+        "properties": {
+          "firstName": {
+            "type": "string",
+            "description": "User’s first name (no length validation)."
+          },
+          "lastName": {
+            "type": "string"
+          },
+          "username": {
+            "type": "integer",
+            "description": "Username (wrong datatype)."
+          },
+          "email": {
+            "type": "string",
+            "description": "User’s email (no email format specified)."
+          },
+          "password": {
+            "type": "string",
+            "description": "User password (missing minLength)."
+          },
+          "age": {
+            "type": "number",
+            "description": "Age of the user (no range limits)."
+          },
+          "gender": {
+            "type": "string",
+            "description": "Gender (enum missing)."
+          },
+          "phoneNumber": {
+            "type": "string",
+            "description": "Contact number (pattern missing)."
+          },
+          "isActive": {
+            "type": "boolean"
+          },
+          "roles": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "address": {
+            "type": "object",
+            "properties": {
+              "street": {
+                "type": "string"
+              },
+              "city": {
+                "type": "string"
+              },
+              "postalCode": {
+                "type": "string",
+                "description": "Postal code (no regex or validation)"
+              },
+              "country": {
+                "type": "string"
+              }
+            }
+          },
+          "dateOfBirth": {
+            "type": "string",
+            "description": "Date of birth (missing format)"
+          },
+          "createdAt": {
+            "type": "string",
+            "description": "Creation timestamp (should be readOnly and format: date-time)"
+          },
+          "preferences": {
+            "type": "object",
+            "properties": {
+              "language": {
+                "type": "string"
+              },
+              "timezone": {
+                "type": "string"
+              },
+              "notifications": {
+                "type": "object",
+                "properties": {
+                  "email": {
+                    "type": "string"
+                  },
+                  "sms": {
+                    "type": "boolean"
+                  }
+                }
+              }
+            }
+          },
+          "metadata": {
+            "type": "object",
+            "description": "Custom metadata (additionalProperties missing)"
+          }
+        }
+      },
+      "UserResponse": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "User ID (uuid format missing)"
+          },
+          "firstName": {
+            "type": "string"
+          },
+          "email": {
+            "type": "string"
+          },
+          "createdAt": {
+            "type": "string"
+          }
+        }
+      }
+    }
+  }
+}
 
