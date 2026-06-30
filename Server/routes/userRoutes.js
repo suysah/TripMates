@@ -26,6 +26,13 @@ router.patch(
 );
 router.delete('/deleteMe', userController.deleteMe);
 
+// Wishlist routes
+router.route('/wishlist').get(userController.getWishlist);
+router
+  .route('/wishlist/:tourId')
+  .post(userController.addToWishlist)
+  .delete(userController.removeFromWishlist);
+
 router.use(authController.restrictTo('admin'));
 
 router

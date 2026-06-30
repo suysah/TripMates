@@ -112,3 +112,60 @@ exports.getUser = factory.getOne(User);
 exports.updateUser = factory.updateOne(User);
 
 exports.deleteUser = factory.deleteOne(User);
+
+// Wishlist methods
+exports.getWishlist = catchAsync(async (req, res, next) => {
+  const user = await User.findById(req.user.id).populate({
+    path: 'wishlist'
+  });
+  
+  if (!user) {
+    return next(new AppError('No user found with that ID', 404));
+  }
+
+  res.status(200).json({
+    status: 'success',
+    results: user.wishlist.length,
+    data: {
+      wishlist: user.wishlist,
+    },
+  });
+});
+
+exports.addToWishlist = catchAsync(async (req, res, next) => {
+  const user = await User.findByIdAndUpdate(
+    req.user.id,
+    { $addToSet: { wishlist: req.params.tourId } },
+    { new: true, runValidators: true }
+  );
+
+  if (!user) {
+    return next(new AppError('No user found with that ID', 404));
+  }
+
+  res.status(200).json({
+    status: 'success',
+    data: {
+      wishlist: user.wishlist,
+    },
+  });
+});
+
+exports.removeFromWishlist = catchAsync(async (req, res, next) => {
+  const user = await User.findByIdAndUpdate(
+    req.user.id,
+    { $pull: { wishlist: req.params.tourId } },
+    { new: true, runValidators: true }
+  );
+
+  if (!user) {
+    return next(new AppError('No user found with that ID', 404));
+  }
+
+  res.status(200).json({
+    status: 'success',
+    data: {
+      wishlist: user.wishlist,
+    },
+  });
+});

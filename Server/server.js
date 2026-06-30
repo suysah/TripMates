@@ -31,11 +31,16 @@ mongoose
     process.exit(1); // Exit if DB connection fails
   });
 
+const initSocket = require('./utils/socket');
+
 // Start the server
 const port = process.env.PORT || 8000;
 const server = app.listen(port, () => {
   // console.log(`App running on port ${port}...`);
 });
+
+// Initialize Socket.io
+initSocket(server);
 
 // Handle asynchronous errors
 process.on('unhandledRejection', (err) => {

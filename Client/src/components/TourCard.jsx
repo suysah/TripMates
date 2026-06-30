@@ -3,6 +3,8 @@ import {
   FaMapMarkerAlt,
   FaFlag,
   FaRegCalendarAlt,
+  FaHeart,
+  FaRegHeart,
 } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
 import useAuth from "../context/useAuth";
@@ -13,18 +15,57 @@ import { useEffect, useRef, useState } from "react";
 import { toast } from "react-toastify";
 
 const TourCard = ({ tour, inBooking = false }) => {
-  const dateStr = tour.startDates[0];
-  const date = new Date(dateStr);
+  const dateStr = tour?.startDates?.[0];
+  const date = dateStr ? new Date(dateStr) : null;
   const { user } = useAuth();
 
-  const formatted = date.toLocaleString("en-US", {
-    month: "long",
-    year: "numeric",
-  });
+  const formatted = date && !isNaN(date.getTime())
+    ? date.toLocaleString("en-US", {
+        month: "long",
+        year: "numeric",
+      })
+    : "TBA";
 
   const BASE_URL = import.meta.env.VITE_BASE_URL;
   const navigate = useNavigate();
   const queryClient = useQueryClient();
+
+  const isWishlisted = user?.wishlist?.includes(tour.id || tour._id);
+
+  const toggleWishlist = async () => {
+    const method = isWishlisted ? "DELETE" : "POST";
+    const res = await fetch(`${BASE_URL}/api/v1/users/wishlist/${tour.id || tour._id}`, {
+      method,
+      credentials: "include",
+      headers: { "Content-Type": "application/json" },
+    });
+    const data = await res.json();
+    if (!res.ok) throw new Error(data.message || "Failed to update wishlist");
+    return data;
+  };
+
+  const wishlistMutation = useMutation({
+    mutationFn: toggleWishlist,
+    onSuccess: (data) => {
+      queryClient.setQueryData(["userinfo"], (oldData) => {
+        if (!oldData?.data?.data) return oldData;
+        return {
+          ...oldData,
+          data: {
+            ...oldData.data,
+            data: {
+              ...oldData.data.data,
+              wishlist: data.data.wishlist,
+            }
+          }
+        };
+      });
+      toast.success(isWishlisted ? "Removed from wishlist" : "Added to wishlist");
+    },
+    onError: (err) => {
+      toast.error(err.message || "Something went wrong");
+    }
+  });
 
   // Modal + review state
   const [isOpen, setIsOpen] = useState(false);
@@ -153,13 +194,35 @@ const TourCard = ({ tour, inBooking = false }) => {
   };
 
   return (
-    <div className="border h-max w-[23rem] bg-white p-5 flex flex-col rounded-xl shadow-md  space-y-3">
-      <img
-        className="h-40 w-full object-cover rounded-xl"
-        src={`${BASE_URL}/public/img/tours/${tour.imageCover}`}
-        alt={`Cover image for ${tour.name}`}
-        loading="lazy"
-      />
+    <div className="border h-max w-[23rem] bg-white p-5 flex flex-col rounded-xl shadow-md space-y-3">
+      <div className="relative overflow-hidden rounded-xl">
+        <img
+          className="h-40 w-full object-cover rounded-xl transition-transform duration-300 hover:scale-105"
+          src={`${BASE_URL}/public/img/tours/${tour.imageCover}`}
+          alt={`Cover image for ${tour.name}`}
+          loading="lazy"
+        />
+        <button
+          type="button"
+          onClick={(e) => {
+            e.stopPropagation();
+            if (!user) {
+              navigate("/login");
+              return;
+            }
+            wishlistMutation.mutate();
+          }}
+          className="absolute top-3 right-3 p-2 bg-white/80 hover:bg-white rounded-full shadow-md text-red-500 hover:scale-110 active:scale-95 transition-all duration-200 z-10"
+          aria-label={isWishlisted ? "Remove from wishlist" : "Add to wishlist"}
+          disabled={wishlistMutation.isPending}
+        >
+          {isWishlisted ? (
+            <FaHeart className="w-5 h-5 fill-current text-red-500" />
+          ) : (
+            <FaRegHeart className="w-5 h-5 text-red-500" />
+          )}
+        </button>
+      </div>
       <h2 className="text-xl font-bold">{tour.name}</h2>
       <h3>
         {tour.difficulty} {tour.duration}-DAYS TOUR
@@ -180,7 +243,7 @@ const TourCard = ({ tour, inBooking = false }) => {
       <div className="flex flex-row justify-center gap-6">
         <div className="text-gray-600 flex justify-center items-center gap-1">
           <FaFlag />
-          {tour.locations.length} stops
+          {tour?.locations?.length || 0} stops
         </div>
         <div className="text-gray-600 flex justify-center items-center gap-1">
           <FaUser />
@@ -200,12 +263,20 @@ const TourCard = ({ tour, inBooking = false }) => {
         </button>
 
         {inBooking && (
-          <button
-            onClick={openReviewModal}
-            className="bg-teal-900 text-white px-4 py-1 rounded-md"
-          >
-            {reviewExist ? "Edit Review" : "Add Review"}
-          </button>
+          <div className="flex gap-2">
+            <button
+              onClick={openReviewModal}
+              className="bg-teal-900 text-white px-3 py-1 rounded-md"
+            >
+              {reviewExist ? "Edit Review" : "Add Review"}
+            </button>
+            <button
+              onClick={() => navigate(`/account/chat/${tour.id || tour._id}`)}
+              className="bg-teal-700 hover:bg-teal-800 text-white px-3 py-1 rounded-md"
+            >
+              Group Chat
+            </button>
+          </div>
         )}
       </div>
 
@@ -246,14 +317,14 @@ const TourCard = ({ tour, inBooking = false }) => {
               className="bg-teal-900 text-white px-4 py-1 rounded-md"
             >
               {isUploading ||
-              addReviewMutation.isLoading ||
-              patchReview.isLoading
+                addReviewMutation.isLoading ||
+                patchReview.isLoading
                 ? reviewExist
                   ? "Updating..."
                   : "Uploading..."
                 : reviewExist
-                ? "Update"
-                : "Upload"}
+                  ? "Update"
+                  : "Upload"}
             </button>
           </div>
         </form>

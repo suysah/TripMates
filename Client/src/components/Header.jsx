@@ -41,7 +41,7 @@ const Header = () => {
   return (
     <header className="bg-gray-900  py-4 px-6">
       <div className="container mx-auto text-white flex justify-between items-center">
-        <div className="text-2xl font-bold">
+        <div className="text-2xl font-bold flex items-center">
           <Link to="/">
             <h1 className="flex items-center justify-center">
               <span>
@@ -54,6 +54,12 @@ const Header = () => {
               </span>
               TripMates
             </h1>
+          </Link>
+          <Link
+            to="/tours-map"
+            className="text-sm font-semibold text-gray-300 hover:text-white transition ml-8"
+          >
+            Find Tours 🗺️
           </Link>
         </div>
 

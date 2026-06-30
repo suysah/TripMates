@@ -54,10 +54,12 @@ exports.uploadTourImage = upload.fields([
 
 // Middleware for resizing images
 exports.resizeTourImages = catchAsync(async (req, res, next) => {
-  if (!req.files.imageCover || !req.files.images) return next();
+  if (!req.files || !req.files.imageCover || !req.files.images) return next();
+
+  const tourId = req.params.id || `new-${Math.random().toString(36).substr(2, 9)}`;
 
   // Resize cover image
-  const imageCoverFilename = `tour-${req.params.id}-${Date.now()}-cover.jpeg`;
+  const imageCoverFilename = `tour-${tourId}-${Date.now()}-cover.jpeg`;
   req.body.imageCover = imageCoverFilename;
 
   await sharp(req.files.imageCover[0].buffer)
@@ -71,7 +73,7 @@ exports.resizeTourImages = catchAsync(async (req, res, next) => {
 
   await Promise.all(
     req.files.images.map(async (file, i) => {
-      const filename = `tour-${req.params.id}-${Date.now()}-${i + 1}.jpeg`;
+      const filename = `tour-${tourId}-${Date.now()}-${i + 1}.jpeg`;
       await sharp(file.buffer)
         .resize(2000, 1333)
         .toFormat('jpeg')

@@ -8,12 +8,7 @@ const PrivateRoute = () => {
 
   // console.log("User", user);
 
-  if (loading)
-    return (
-      <p>
-        <Spinner />
-      </p>
-    );
+  if (loading) return <Spinner />;
 
   return user ? <Outlet /> : <Login />;
 };
