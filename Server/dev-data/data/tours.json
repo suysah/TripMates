@@ -466,5 +466,349 @@
         "day": 5
       }
     ]
+  },
+  {
+    "startLocation": {
+      "description": "Delhi, IND",
+      "type": "Point",
+      "coordinates": [77.2090, 28.6139],
+      "address": "Connaught Place, New Delhi, Delhi 110001, India"
+    },
+    "ratingsAverage": 4.8,
+    "ratingsQuantity": 0,
+    "images": ["tour-10-1.jpg", "tour-10-2.jpg", "tour-10-3.jpg"],
+    "startDates": [
+      "2026-10-15T09:00:00.000Z",
+      "2026-11-20T09:00:00.000Z",
+      "2027-01-10T09:00:00.000Z"
+    ],
+    "_id": "5c88fa8cf4afda39709c2980",
+    "name": "The Golden Triangle of India",
+    "duration": 7,
+    "maxGroupSize": 12,
+    "difficulty": "easy",
+    "guides": ["5c8a21f22f8fb814b56fa18a", "5c8a23412f8fb814b56fa18c"],
+    "price": 699,
+    "summary": "Explore the cultural heritage of Delhi, Agra, and Jaipur",
+    "description": "Experience the magic of India's Golden Triangle. Marvel at the beauty of the Taj Mahal in Agra, explore the pink-hued palaces of Jaipur, and navigate the bustling historic markets of Old Delhi. A perfect introduction to India's rich history, vibrant colors, and majestic architecture with local culinary highlights.",
+    "imageCover": "tour-10-cover.jpg",
+    "locations": [
+      {
+        "_id": "5c88fa8cf4afda39709c2981",
+        "description": "Chandni Chowk Old Delhi",
+        "type": "Point",
+        "coordinates": [77.2295, 28.6562],
+        "day": 1
+      },
+      {
+        "_id": "5c88fa8cf4afda39709c2982",
+        "description": "Taj Mahal, Agra",
+        "type": "Point",
+        "coordinates": [78.0421, 27.1751],
+        "day": 3
+      },
+      {
+        "_id": "5c88fa8cf4afda39709c2983",
+        "description": "Hawa Mahal, Jaipur",
+        "type": "Point",
+        "coordinates": [75.8267, 26.9239],
+        "day": 5
+      }
+    ]
+  },
+  {
+    "startLocation": {
+      "description": "Tokyo, JPN",
+      "type": "Point",
+      "coordinates": [139.6917, 35.6895],
+      "address": "Shinjuku, Tokyo 160-0022, Japan"
+    },
+    "ratingsAverage": 4.9,
+    "ratingsQuantity": 0,
+    "images": ["tour-11-1.jpg", "tour-11-2.jpg", "tour-11-3.jpg"],
+    "startDates": [
+      "2026-04-05T09:00:00.000Z",
+      "2026-05-12T09:00:00.000Z",
+      "2026-10-18T09:00:00.000Z"
+    ],
+    "_id": "5c88fa8cf4afda39709c2990",
+    "name": "The Historic Japan Heritage",
+    "duration": 10,
+    "maxGroupSize": 10,
+    "difficulty": "medium",
+    "guides": ["5c8a22c62f8fb814b56fa18b", "5c8a201e2f8fb814b56fa186"],
+    "price": 2499,
+    "summary": "Immerse in Japanese history from Tokyo to ancient Kyoto",
+    "description": "Journey through the contrasts of modern innovation and ancient tradition in Japan. Discover Tokyo's neon-lit neighborhoods and high-speed transit before escaping to the serene temples, bamboo groves, and traditional tea ceremonies of Kyoto. Witness the majestic Mount Fuji and soak in a relaxing natural hot spring on this premium tour.",
+    "imageCover": "tour-11-cover.jpg",
+    "locations": [
+      {
+        "_id": "5c88fa8cf4afda39709c2991",
+        "description": "Shibuya Crossing, Tokyo",
+        "type": "Point",
+        "coordinates": [139.7002, 35.6580],
+        "day": 1
+      },
+      {
+        "_id": "5c88fa8cf4afda39709c2992",
+        "description": "Hakone Hot Springs",
+        "type": "Point",
+        "coordinates": [139.1069, 35.2324],
+        "day": 4
+      },
+      {
+        "_id": "5c88fa8cf4afda39709c2993",
+        "description": "Fushimi Inari Shrine, Kyoto",
+        "type": "Point",
+        "coordinates": [135.7727, 34.9671],
+        "day": 7
+      }
+    ]
+  },
+  {
+    "startLocation": {
+      "description": "Cinque Terre, ITA",
+      "type": "Point",
+      "coordinates": [9.7301, 44.1278],
+      "address": "Riomaggiore, La Spezia, 19017, Italy"
+    },
+    "ratingsAverage": 4.7,
+    "ratingsQuantity": 0,
+    "images": ["tour-12-1.jpg", "tour-12-2.jpg", "tour-12-3.jpg"],
+    "startDates": [
+      "2026-06-15T09:00:00.000Z",
+      "2026-07-20T09:00:00.000Z",
+      "2026-09-05T09:00:00.000Z"
+    ],
+    "_id": "5c88fa8cf4afda39709c29a0",
+    "name": "The Italian Riviera & Alps",
+    "duration": 8,
+    "maxGroupSize": 8,
+    "difficulty": "difficult",
+    "guides": ["5c8a21d02f8fb814b56fa189", "5c8a1f4e2f8fb814b56fa185"],
+    "price": 1899,
+    "summary": "Hike the colorful Cinque Terre and climb the Alpine slopes",
+    "description": "A thrill-seeker's dream combining the spectacular, rugged coastal paths of the Italian Riviera with active hiking in the breathtaking Italian Alps. Traverse the iconic five villages of Cinque Terre by foot, sample world-class Genoese cuisine, and then travel north to conquer the stunning, high-altitude trails of the Dolomites.",
+    "imageCover": "tour-12-cover.jpg",
+    "locations": [
+      {
+        "_id": "5c88fa8cf4afda39709c29a1",
+        "description": "Riomaggiore Coastline",
+        "type": "Point",
+        "coordinates": [9.7383, 44.0988],
+        "day": 1
+      },
+      {
+        "_id": "5c88fa8cf4afda39709c29a2",
+        "description": "Vernazza Harbor Trail",
+        "type": "Point",
+        "coordinates": [9.6830, 44.1350],
+        "day": 3
+      },
+      {
+        "_id": "5c88fa8cf4afda39709c29a3",
+        "description": "Dolomites Peaks, Cortina",
+        "type": "Point",
+        "coordinates": [12.1357, 46.5405],
+        "day": 6
+      }
+    ]
+  },
+  {
+    "startLocation": {
+      "description": "Nice, FRA",
+      "type": "Point",
+      "coordinates": [7.2661, 43.7102],
+      "address": "Promenade des Anglais, Nice 06000, France"
+    },
+    "ratingsAverage": 4.6,
+    "ratingsQuantity": 0,
+    "images": ["tour-13-1.jpg", "tour-13-2.jpg", "tour-13-3.jpg"],
+    "startDates": [
+      "2026-06-10T09:00:00.000Z",
+      "2026-07-15T09:00:00.000Z",
+      "2026-09-08T09:00:00.000Z"
+    ],
+    "_id": "5c88fa8cf4afda39709c29b0",
+    "name": "The French Riviera & Provence",
+    "duration": 6,
+    "maxGroupSize": 10,
+    "difficulty": "easy",
+    "guides": ["5c8a21f22f8fb814b56fa18a", "5c8a201e2f8fb814b56fa186"],
+    "price": 1599,
+    "summary": "Sun-drenched Mediterranean coast and lavender fields of Provence",
+    "description": "Experience the epitome of southern French luxury and charm. Relax along the glamorous promenade of Nice, sail by the historic ramparts of Saint-Tropez, and venture inland to the spectacular lavender fields and Roman monuments of historic Avignon. Enjoy gourmet wine tastings and Michelin-star coastal cuisine.",
+    "imageCover": "tour-13-cover.jpg",
+    "locations": [
+      {
+        "_id": "5c88fa8cf4afda39709c29b1",
+        "description": "Old Town Nice",
+        "type": "Point",
+        "coordinates": [7.2758, 43.6961],
+        "day": 1
+      },
+      {
+        "_id": "5c88fa8cf4afda39709c29b2",
+        "description": "Saint-Tropez Harbor",
+        "type": "Point",
+        "coordinates": [6.6385, 43.2726],
+        "day": 3
+      },
+      {
+        "_id": "5c88fa8cf4afda39709c29b3",
+        "description": "Palais des Papes, Avignon",
+        "type": "Point",
+        "coordinates": [4.8075, 43.9507],
+        "day": 5
+      }
+    ]
+  },
+  {
+    "startLocation": {
+      "description": "Cairo, EGY",
+      "type": "Point",
+      "coordinates": [31.2357, 30.0444],
+      "address": "Tahrir Square, Cairo, Egypt"
+    },
+    "ratingsAverage": 4.8,
+    "ratingsQuantity": 0,
+    "images": ["tour-14-1.jpg", "tour-14-2.jpg", "tour-14-3.jpg"],
+    "startDates": [
+      "2026-11-05T09:00:00.000Z",
+      "2026-12-10T09:00:00.000Z",
+      "2027-02-15T09:00:00.000Z"
+    ],
+    "_id": "5c88fa8cf4afda39709c29c0",
+    "name": "The Nile River Valley Tour",
+    "duration": 8,
+    "maxGroupSize": 15,
+    "difficulty": "medium",
+    "guides": ["5c8a22c62f8fb814b56fa18b", "5c8a23412f8fb814b56fa18c"],
+    "price": 1299,
+    "summary": "Cruise the historic Nile and marvel at ancient Pyramids",
+    "description": "Step back in time to the land of the Pharaohs. Begin in Cairo at the iconic Giza Plateau, then cruise down the winding Nile River to the spectacular temples of Luxor and Karnak. Witness the colossal tombs of the Valley of the Kings and unwind under the desert sky on a traditional Egyptian Felucca.",
+    "imageCover": "tour-14-cover.jpg",
+    "locations": [
+      {
+        "_id": "5c88fa8cf4afda39709c29c1",
+        "description": "Giza Pyramids Complex",
+        "type": "Point",
+        "coordinates": [31.1342, 29.9792],
+        "day": 1
+      },
+      {
+        "_id": "5c88fa8cf4afda39709c29c2",
+        "description": "Karnak Temple Complex, Luxor",
+        "type": "Point",
+        "coordinates": [32.6573, 25.7188],
+        "day": 4
+      },
+      {
+        "_id": "5c88fa8cf4afda39709c29c3",
+        "description": "Philae Temple, Aswan",
+        "type": "Point",
+        "coordinates": [32.8844, 24.0250],
+        "day": 7
+      }
+    ]
+  },
+  {
+    "startLocation": {
+      "description": "Cairns, AUS",
+      "type": "Point",
+      "coordinates": [145.7781, -16.9186],
+      "address": "Spence St, Cairns City QLD 4870, Australia"
+    },
+    "ratingsAverage": 4.7,
+    "ratingsQuantity": 0,
+    "images": ["tour-15-1.jpg", "tour-15-2.jpg", "tour-15-3.jpg"],
+    "startDates": [
+      "2026-09-12T09:00:00.000Z",
+      "2026-11-04T09:00:00.000Z",
+      "2027-01-20T09:00:00.000Z"
+    ],
+    "_id": "5c88fa8cf4afda39709c29d0",
+    "name": "The Great Barrier Reef Surf",
+    "duration": 7,
+    "maxGroupSize": 12,
+    "difficulty": "medium",
+    "guides": ["5c8a21d02f8fb814b56fa189", "5c8a1f292f8fb814b56fa184"],
+    "price": 1999,
+    "summary": "Snorkel the Great Barrier Reef and catch waves in Port Douglas",
+    "description": "Explore the wonders of Tropical North Queensland. Sail on a luxury catamaran to snorkel the vibrant corals and meet the rich marine life of the outer Great Barrier Reef, then catch perfect waves off the coast of Port Douglas and explore the ancient Daintree Rainforest.",
+    "imageCover": "tour-15-cover.jpg",
+    "locations": [
+      {
+        "_id": "5c88fa8cf4afda39709c29d1",
+        "description": "Cairns Marina",
+        "type": "Point",
+        "coordinates": [145.7836, -16.9248],
+        "day": 1
+      },
+      {
+        "_id": "5c88fa8cf4afda39709c29d2",
+        "description": "Outer Great Barrier Reef",
+        "type": "Point",
+        "coordinates": [146.0000, -16.5000],
+        "day": 3
+      },
+      {
+        "_id": "5c88fa8cf4afda39709c29d3",
+        "description": "Daintree National Park",
+        "type": "Point",
+        "coordinates": [145.4185, -16.1700],
+        "day": 5
+      }
+    ]
+  },
+  {
+    "startLocation": {
+      "description": "Manaus, BRA",
+      "type": "Point",
+      "coordinates": [-60.0217, -3.1190],
+      "address": "Av. Eduardo Ribeiro, Centro, Manaus - AM, 69010-001, Brazil"
+    },
+    "ratingsAverage": 4.5,
+    "ratingsQuantity": 0,
+    "images": ["tour-16-1.jpg", "tour-16-2.jpg", "tour-16-3.jpg"],
+    "startDates": [
+      "2026-08-01T09:00:00.000Z",
+      "2026-10-05T09:00:00.000Z",
+      "2026-12-15T09:00:00.000Z"
+    ],
+    "_id": "5c88fa8cf4afda39709c29e0",
+    "name": "The Amazon RainForest Trek",
+    "duration": 5,
+    "maxGroupSize": 8,
+    "difficulty": "difficult",
+    "guides": ["5c8a21f22f8fb814b56fa18a", "5c8a1f4e2f8fb814b56fa185"],
+    "price": 1399,
+    "summary": "Deep jungle survival hike and wildlife river cruise",
+    "description": "Embark on a thrilling raw adventure in the heart of the Amazon. Travel deep into the jungle to learn wilderness survival skills from local indigenous guides, camp under the canopy, and enjoy a night river safari to observe caimans, jaguars, and unique nocturnal species. Truly an unforgettable expedition.",
+    "imageCover": "tour-16-cover.jpg",
+    "locations": [
+      {
+        "_id": "5c88fa8cf4afda39709c29e1",
+        "description": "Port of Manaus",
+        "type": "Point",
+        "coordinates": [-60.0308, -3.1364],
+        "day": 1
+      },
+      {
+        "_id": "5c88fa8cf4afda39709c29e2",
+        "description": "Encontro das Águas",
+        "type": "Point",
+        "coordinates": [-59.9044, -3.1344],
+        "day": 2
+      },
+      {
+        "_id": "5c88fa8cf4afda39709c29e3",
+        "description": "Anavilhanas Archipelago",
+        "type": "Point",
+        "coordinates": [-60.7589, -2.6908],
+        "day": 4
+      }
+    ]
   }
 ]
+
